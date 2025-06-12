@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中英学习卡片 - 慢速语音版</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .subtitle {
+            color: #4a5568;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        
+        .instructions {
+            background-color: #e3f2fd;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 5px solid #2196f3;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .instructions p {
+            color: #2d3748;
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .instructions i {
+            color: #2196f3;
+            margin-right: 10px;
+            min-width: 24px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+        
+        .card {
+            background: linear-gradient(to bottom right, #ffffff, #f5f9ff);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e3e9ff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-number {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-bottom-right-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .card-content {
+            display: flex;
+            width: 100%;
+            align-items: center;
+        }
+        
+        .chinese-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding-left: 45px;
+        }
+        
+        .speak-btn {
+            background: linear-gradient(to right, #4a00e0, #8e2de2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(78, 0, 224, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 160px;
+        }
+        
+        .speak-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 0, 224, 0.4);
+            background: linear-gradient(to right, #3a00c0, #7a1de2);
+        }
+        
+        .speak-btn i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .english-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .toggle-btn {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 176, 155, 0.3);
+            width: 160px;
+        }
+        
+        .toggle-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 176, 155, 0.4);
+            background: linear-gradient(to right, #009b87, #86b935);
+        }
+        
+        .english-text {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(to bottom, #f0f7ff, #e1eeff);
+            border-radius: 12px;
+            font-size: 1.2rem;
+            color: #1a2980;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            display: none;
+            border: 1px solid #c5d8ff;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .english-text.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            color: #718096;
+            margin: 0 20px;
+            font-size: 1.5rem;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #718096;
+            font-size: 1rem;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .progress-container {
+            margin: 25px 0;
+            background: #e0e7ff;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* 慢速语音提示 */
+        .speed-info {
+            background: #fff9db;
+            border: 2px solid #ffd43b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .speed-info i {
+            color: #f08c00;
+            font-size: 1.8rem;
+            min-width: 40px;
+        }
+        
+        .speed-info p {
+            color: #5c3c00;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .card-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chinese-container {
+                padding-left: 0;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+            
+            .english-container {
+                align-items: flex-start;
+                margin-top: 15px;
+                width: 100%;
+            }
+            
+            .toggle-btn, .speak-btn {
+                width: 100%;
+            }
+            
+            .divider {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .instructions {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .instructions {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-language"></i> 中英学习卡片系统</h1>
+            <p class="subtitle">交通工具与地点表达 - 慢速语音学习版</p>
+        </header>
+        
+        <div class="instructions">
+            <p><i class="fas fa-info-circle"></i> <strong>使用说明：</strong> 点击左侧的"播放中文"按钮可以听到慢速中文发音（中文文本不显示）。点击右侧的"显示英文"按钮可以查看英文表达，再次点击可隐藏英文内容。</p>
+            <p><i class="fas fa-sort-numeric-up"></i> <strong>序号功能：</strong> 每张卡片左上角的序号表示学习条目的顺序，方便您跟踪学习进度。</p>
+            <p><i class="fas fa-chart-line"></i> <strong>进度条：</strong> 下方进度条显示您的学习进度，完成所有卡片学习将填满进度条。</p>
+        </div>
+        
+        <div class="speed-info">
+            <i class="fas fa-volume-down"></i>
+            <p><strong>慢速语音功能：</strong> 所有中文发音已调整为<strong>0.7倍慢速</strong>，特别适合语言学习者。您可以反复点击播放按钮，仔细聆听每个词汇的发音细节。</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-text" id="progressText">学习进度：0/30 (0%)</div>
+        
+        <div class="card-grid" id="cardContainer">
+            <!-- 卡片将通过JavaScript动态生成 -->
+        </div>
+        
+        <footer>
+            <p>中英文对照学习系统 &copy; 2023 | 慢速语音版专为语言学习设计</p>
+        </footer>
+    </div>
+
+    <script>
+        // 学习卡片数据
+        const cardData = [
+            { id: 1, chinese: "问路", english: "ask the way" },
+            { id: 2, chinese: "到达你的家", english: "get to your home" },
+            { id: 3, chinese: "乘地铁", english: "take the metro" },
+            { id: 4, chinese: "上下地铁", english: "get on/off the metro" },
+            { id: 5, chinese: "在公园站", english: " at Park Station" },
+            { id: 6, chinese: "走向月亮街", english: "walk to Moon Street" },
+            { id: 7, chinese: "在我/他/他们/我们旁边", english: "next to me/him/them/us" },
+            { id: 8, chinese: "从城市图书馆站出来", english: " come out from City Library Station" },
+            { id: 9, chinese: "找到书店", english: "find the bookshop" },
+            { id: 10, chinese: "向警察求助", english: "ask a policeman for help" },
+            { id: 11, chinese: "到这/那/家", english: "get here/there/home" },
+            { id: 12, chinese: "等火车", english: "wait for the train" },
+            { id: 13, chinese: "去看医生/牙医", english: "go to see the doctor/dentist" },
+            { id: 14, chinese: "你为什么开心？因为我能去看电影。", english: "Why are you happy? Because I can go to the cinema." },
+            { id: 15, chinese: "喝许多温水", english: "drink much warm water" },
+            { id: 16, chinese: "发烧", english: "have a fever" },
+            { id: 17, chinese: "吃些药", english: "take some medicine" },
+            { id: 18, chinese: "在睡觉前", english: "before bedtime" },
+            { id: 19, chinese: "让我检查一下。", english: "Let me check." },
+            { id: 20, chinese: "指着他的脖子", english: "point at his neck" },
+            { id: 21, chinese: "打扰了，我怎么样到达医院？", english: "Excuse me, how do I get to the hospital ?" },
+            { id: 22, chinese: "沿着这条街走。 在第一个红绿灯左拐。", english: "Go along this street. Turn left at the first traffic lights." },
+            { id: 23, chinese: "她乘地铁去书店。", english: "She takes the metro to the bookshop. / She goes to the bookshop by metro." },
+            { id: 24, chinese: "她睡前刷牙。", english: "She brushes her teeth before bedtime." },
+            { id: 25, chinese: "他怎么了？ 他牙疼。", english: "What’s wrong with him? He has a toothache." },
+            { id: 26, chinese: "你可以看到电影院在你的右边。", english: "You can see the cinema on your right." },
+            { id: 27, chinese: "他应该怎么做？ 他应该在家休息。", english: "What should he do ? He should have a rest at home." },
+            { id: 28, chinese: "他禁止在图书馆里吃喝。", english: "He shouldn't eat or drink in the library." },
+            { id: 29, chinese: "他的耳朵疼，他不能听清。", english: "His ear hurts. He can’t hear well." },
+            { id: 30, chinese: "她想要拜访苏海的新家。", english: "She wants to visit SU Hai’s new home." }
+        ];
+
+        // 跟踪学习进度
+        let learnedCards = new Set();
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            const cardContainer = document.getElementById('cardContainer');
+            
+            // 为每条数据创建卡片
+            cardData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-number">${item.id}</div>
+                    <div class="card-content">
+                        <div class="chinese-container">
+                            <button class="speak-btn" data-text="${item.chinese}" data-id="${item.id}">
+                                <i class="fas fa-volume-up"></i>播放中文
+                            </button>
+                        </div>
+                        <div class="divider">|</div>
+                        <div class="english-container">
+                            <button class="toggle-btn" data-id="${item.id}">显示英文</button>
+                            <div class="english-text" id="english-${item.id}">${item.english}</div>
+                        </div>
+                    </div>
+                `;
+                cardContainer.appendChild(card);
+            });
+            
+            // 添加播放中文事件
+            document.querySelectorAll('.speak-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const text = this.getAttribute('data-text');
+                    const id = this.getAttribute('data-id');
+                    speakText(text);
+                    
+                    // 标记为已学习
+                    if (!learnedCards.has(parseInt(id))) {
+                        learnedCards.add(parseInt(id));
+                        updateProgress();
+                    }
+                    
+                    // 添加播放动画效果
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 播放中...';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-volume-up"></i> 播放中文';
+                    }, 2000);
+                });
+            });
+            
+            // 添加显示/隐藏英文事件
+            document.querySelectorAll('.toggle-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const englishText = document.getElementById(`english-${id}`);
+                    englishText.classList.toggle('show');
+                    
+                    // 更新按钮文本
+                    if (englishText.classList.contains('show')) {
+                        this.innerHTML = '<i class="fas fa-eye-slash"></i> 隐藏英文';
+                        
+                        // 标记为已学习
+                        if (!learnedCards.has(parseInt(id))) {
+                            learnedCards.add(parseInt(id));
+                            updateProgress();
+                        }
+                    } else {
+                        this.innerHTML = '<i class="fas fa-eye"></i> 显示英文';
+                    }
+                });
+            });
+        });
+        
+        // 更新进度条
+        function updateProgress() {
+            const progress = (learnedCards.size / cardData.length) * 100;
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `学习进度：${learnedCards.size}/${cardData.length} (${Math.round(progress)}%)`;
+            
+            // 完成学习时的特殊效果
+            if (learnedCards.size === cardData.length) {
+                progressBar.style.background = 'linear-gradient(to right, #00b09b, #96c93d)';
+                progressText.innerHTML = '<i class="fas fa-trophy"></i> 恭喜！您已完成所有学习内容！';
+                progressText.style.color = '#00b09b';
+                progressText.style.fontWeight = 'bold';
+                
+                // 添加庆祝动画
+                document.querySelectorAll('.card').forEach(card => {
+                    card.style.animation = 'celebrate 2s ease';
+                });
+                
+                // 动态添加动画关键帧
+                const styleSheet = document.styleSheets[0];
+                styleSheet.insertRule(`
+                    @keyframes celebrate {
+                        0% { transform: translateY(0); }
+                        25% { transform: translateY(-10px); }
+                        50% { transform: translateY(0); }
+                        75% { transform: translateY(-10px); }
+                        100% { transform: translateY(0); }
+                    }
+                `, styleSheet.cssRules.length);
+            }
+        }
+        
+        // 文字转语音功能 - 使用慢速语音
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                // 停止当前正在播放的语音
+                window.speechSynthesis.cancel();
+                
+                // 创建新的语音实例
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN'; // 设置中文语音
+                utterance.rate = 0.7; // 调整为0.7倍慢速，适合学习
+                utterance.pitch = 1.0; // 正常音调
+                
+                // 播放语音
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('抱歉，您的浏览器不支持文字转语音功能。建议使用Chrome或Edge浏览器。');
+            }
+        }
+    </script>
+</body>
+</html>

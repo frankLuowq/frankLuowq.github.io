@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习单元导航系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2a3a7c, #3a4a8c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #a1c4fd);
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a1c4fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(to right, #ff9a9e, #a1c4fd);
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 12px;
+            min-width: 160px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-item .number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff9a9e, #a1c4fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card:hover .icon {
+            transform: scale(1.2) rotate(5deg);
+            color: #ff9a9e;
+        }
+        
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            color: #a1c4fd;
+            z-index: 1;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            z-index: 1;
+            font-weight: 600;
+        }
+        
+        .card a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+        
+        .unit-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff9a9e, #a1c4fd);
+            border-radius: 3px;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.1rem;
+            padding-left: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+                padding: 10px 15px;
+            }
+            
+            .stat-item .number {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>学习单元导航系统</h1>
+            <p class="subtitle">精选15个学习单元，涵盖从基础到高级的知识点。每个单元包含详细讲解、案例分析和实践练习，助您系统掌握核心技能。</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="number">15</div>
+                    <div>学习单元</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">126</div>
+                    <div>课时内容</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">58</div>
+                    <div>实践练习</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">24</div>
+                    <div>案例研究</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-box" placeholder="搜索学习单元...">
+        </div>
+        
+        <div class="grid-container">
+            <div class="card">
+                <div class="unit-number">1</div>
+                <div class="icon"><i class="fas fa-book-open"></i></div>
+                <h3>unit1</h3>
+                <div class="progress-bar"><div class="progress" style="width: 25%"></div></div>
+                <a href="unit1.html" title="访问unit1"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">2</div>
+                <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>unit2</h3>
+                <div class="progress-bar"><div class="progress" style="width: 10%"></div></div>
+                <a href="unit2.html" title="访问unit2"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">3</div>
+                <div class="icon"><i class="fas fa-sync-alt"></i></div>
+                <h3>unit1-2</h3>
+                <div class="progress-bar"><div class="progress" style="width: 5%"></div></div>
+                <a href="unit1-2.html" title="访问unit1-2"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">4</div>
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <h3>unit3</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit3.html" title="访问unit3"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">5</div>
+                <div class="icon"><i class="fas fa-cogs"></i></div>
+                <h3>unit3-2</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit3-2.html" title="访问unit3-2"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">6</div>
+                <div class="icon"><i class="fas fa-atom"></i></div>
+                <h3>unit4</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit4.html" title="访问unit4"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">7</div>
+                <div class="icon"><i class="fas fa-flask"></i></div>
+                <h3>unit4-2</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit4-2.html" title="访问unit4-2"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">8</div>
+                <div class="icon"><i class="fas fa-project-diagram"></i></div>
+                <h3>unit3-4</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit3-4.html" title="访问unit3-4"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">9</div>
+                <div class="icon"><i class="fas fa-calculator"></i></div>
+                <h3>unit5</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit5.html" title="访问unit5"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">10</div>
+                <div class="icon"><i class="fas fa-code"></i></div>
+                <h3>unit5-2</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit5-2.html" title="访问unit5-2"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">11</div>
+                <div class="icon"><i class="fas fa-globe"></i></div>
+                <h3>unit6</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit6.html" title="访问unit6"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">12</div>
+                <div class="icon"><i class="fas fa-comments"></i></div>
+                <h3>unit6-2</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit6-2.html" title="访问unit6-2"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">13</div>
+                <div class="icon"><i class="fas fa-database"></i></div>
+                <h3>unit7</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit7.html" title="访问unit7"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">14</div>
+                <div class="icon"><i class="fas fa-key"></i></div>
+                <h3>unit7-2</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit7-2.html" title="访问unit7-2"></a>
+            </div>
+            
+            <div class="card">
+                <div class="unit-number">15</div>
+                <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>unit8</h3>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="unit8.html" title="访问unit8"></a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>学习导航系统 © 2023 | 15个精心设计的学习单元 | 持续更新中...</p>
+        </footer>
+    </div>
+
+    <script>
+        // 卡片悬停效果增强
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.03)';
+                this.style.boxShadow = '0 12px 25px rgba(0, 0, 0, 0.3)';
+                this.style.background = 'rgba(255, 255, 255, 0.15)';
+                
+                const icon = this.querySelector('.icon');
+                icon.style.transform = 'scale(1.2) rotate(5deg)';
+                icon.style.color = '#ff9a9e';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+                this.style.background = '';
+                
+                const icon = this.querySelector('.icon');
+                icon.style.transform = '';
+                icon.style.color = '#a1c4fd';
+            });
+            
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+        });
+        
+        // 搜索功能
+        const searchBox = document.querySelector('.search-box');
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // 进度条动画
+        document.querySelectorAll('.progress').forEach(progress => {
+            const width = progress.style.width;
+            progress.style.width = '0';
+            setTimeout(() => {
+                progress.style.width = width;
+            }, 500);
+        });
+        
+        // 背景动画增强
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.body.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+        });
+    </script>
+</body>
+</html>
