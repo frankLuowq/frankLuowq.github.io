@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语文知识点复习大全</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav a {
+            margin: 5px 10px;
+            padding: 8px 18px;
+            background: #4b6cb7;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav a:hover {
+            background: #182848;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #4b6cb7;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        h3 {
+            color: #182848;
+            margin: 15px 0 10px;
+            font-size: 1.4rem;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            background: #eef2f7;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .character {
+            padding: 15px;
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .character:hover {
+            background: linear-gradient(120deg, #cfdef3 0%, #e0eafc 100%);
+            transform: scale(1.03);
+        }
+        .character-name {
+            font-weight: bold;
+            color: #182848;
+            font-size: 1.1rem;
+        }
+        .character-desc {
+            color: #4b6cb7;
+        }
+        .books-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .books-table th, .books-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .books-table th {
+            background-color: #f1f5fd;
+            font-weight: 600;
+        }
+        .books-table tr:hover {
+            background-color: #f8f9ff;
+        }
+        .poem {
+            background: #f9fbfd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #4b6cb7;
+        }
+        .poem-title {
+            color: #182848;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .poem-content {
+            font-style: italic;
+            color: #555;
+            line-height: 1.8;
+        }
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .words-card {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .words-title {
+            color: #182848;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .words-content {
+            color: #4b6cb7;
+        }
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        .quote {
+            background: #f8f9fa;
+            border-left: 4px solid #4b6cb7;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: #e0eafc;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+            font-weight: 500;
+        }
+        .tab.active {
+            background: #4b6cb7;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 0 0 10px 10px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #182848;
+            color: white;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .card-grid, .character-grid, .words-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .nav a {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>语文知识点复习大全</h1>
+            <p class="subtitle">涵盖人物品质、四大名著、常考作者、词语积累、古诗文鉴赏等核心知识点</p>
+        </header>
+        
+        <div class="nav">
+            <a href="#characters">人物品质</a>
+            <a href="#books">四大名著</a>
+            <a href="#authors">常考作者</a>
+            <a href="#vocabulary">词语积累</a>
+            <a href="#poems">古诗文鉴赏</a>
+        </div>
+        
+        <div class="content">
+            <!-- 人物品质 -->
+            <section id="characters" class="section">
+                <h2>一、人物品质</h2>
+                <div class="character-grid">
+                    <div class="character">
+                        <div class="character-name">诸葛亮</div>
+                        <div class="character-desc">神机妙算</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">周瑜</div>
+                        <div class="character-desc">妒忌才能</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">鲁肃</div>
+                        <div class="character-desc">忠厚老实</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">曹操</div>
+                        <div class="character-desc">生性多疑</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">武松</div>
+                        <div class="character-desc">武艺高强</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">孙悟空</div>
+                        <div class="character-desc">神通广大</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">贾宝玉</div>
+                        <div class="character-desc">善良纯真</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">毛主席</div>
+                        <div class="character-desc">不搞特殊</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">刘伯承</div>
+                        <div class="character-desc">意志坚强</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">方志敏</div>
+                        <div class="character-desc">舍己为公</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">小嘎子</div>
+                        <div class="character-desc">机灵好胜</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">小胖墩儿</div>
+                        <div class="character-desc">沉着冷静</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">祥子</div>
+                        <div class="character-desc">结实健壮</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">严监生</div>
+                        <div class="character-desc">视财如命、吝啬</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">刷子李</div>
+                        <div class="character-desc">技艺高超</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">孙膑</div>
+                        <div class="character-desc">足智多谋</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">船长</div>
+                        <div class="character-desc">沉着冷静、机智果断</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">杨氏子</div>
+                        <div class="character-desc">机智有礼</div>
+                    </div>
+                    <div class="character">
+                        <div class="character-name">林黛玉</div>
+                        <div class="character-desc">多愁善感</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 四大名著 -->
+            <section id="books" class="section">
+                <h2>二、四大名著</h2>
+                <table class="books-table">
+                    <tr>
+                        <th>作品</th>
+                        <th>朝代</th>
+                        <th>作者</th>
+                    </tr>
+                    <tr>
+                        <td>《三国演义》</td>
+                        <td>元末明初</td>
+                        <td>罗贯中</td>
+                    </tr>
+                    <tr>
+                        <td>《水浒传》</td>
+                        <td>元末明初</td>
+                        <td>施耐庵</td>
+                    </tr>
+                    <tr>
+                        <td>《西游记》</td>
+                        <td>明代</td>
+                        <td>吴承恩</td>
+                    </tr>
+                    <tr>
+                        <td>《红楼梦》</td>
+                        <td>清代</td>
+                        <td>曹雪芹</td>
+                    </tr>
+                </table>
+            </section>
+            
+            <!-- 常考作者和出处 -->
+            <section id="authors" class="section">
+                <h2>三、常考作者和出处</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>1. 《祖父的园子》</h3>
+                        <p>作者：萧红</p>
+                        <p>出处：《呼兰河传》</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. 《月是故乡明》</h3>
+                        <p>作者：季羡林</p>
+                    </div>
+                    <div class="card">
+                        <h3>3. 《摔跤》</h3>
+                        <p>作者：徐光耀</p>
+                        <p>出处：《小兵张嘎》</p>
+                    </div>
+                    <div class="card">
+                        <h3>4. 《他像一棵挺脱的树》</h3>
+                        <p>作者：老舍（原名：舒庆春）</p>
+                        <p>出处：《骆驼祥子》</p>
+                    </div>
+                    <div class="card">
+                        <h3>5. 《两茎灯草》</h3>
+                        <p>作者：清·吴敬梓</p>
+                        <p>出处：《儒林外史》（中国古典讽刺小说）</p>
+                    </div>
+                    <div class="card">
+                        <h3>6. 《刷子李》</h3>
+                        <p>作者：冯骥才</p>
+                        <p>出处：《俗世奇人》</p>
+                    </div>
+                    <div class="card">
+                        <h3>7. 《自相矛盾》</h3>
+                        <p>作者：（战国）韩非</p>
+                        <p>出处：《韩非子·难一》</p>
+                    </div>
+                    <div class="card">
+                        <h3>8. 《田忌赛马》</h3>
+                        <p>作者：（汉代）司马迁</p>
+                        <p>出处：《史记·孙子吴起列传》</p>
+                    </div>
+                    <div class="card">
+                        <h3>9. 《跳水》</h3>
+                        <p>作者：（俄国）列夫·托尔斯泰</p>
+                    </div>
+                    <div class="card">
+                        <h3>10. 《威尼斯小艇》</h3>
+                        <p>作者：（美国）马克·吐温</p>
+                    </div>
+                    <div class="card">
+                        <h3>11. 《杨氏之子》</h3>
+                        <p>作者：（南朝）刘义庆</p>
+                        <p>出处：《世说新语·言语》</p>
+                    </div>
+                    <div class="card">
+                        <h3>12. 《手指》</h3>
+                        <p>作者：丰子恺</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 词语表 -->
+            <section id="vocabulary" class="section">
+                <h2>四、词语积累</h2>
+                
+                <h3>词语表</h3>
+                <div class="words-grid">
+                    <div class="words-card">
+                        <div class="words-title">2 课</div>
+                        <div class="words-content">蝴蝶、蜻蜓、蚂蚱、圆滚滚、明晃晃、樱桃、榆树、瞎闹、锄头、承认、随意</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">5 课</div>
+                        <div class="words-content">妒忌、委托、照办、预计、紧急、军令状、探听、疑惑、私自、布置、调度、呐喊、神机妙算</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">6 课</div>
+                        <div class="words-content">半夜三更、寻思、耻笑、胸膛、武艺</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">10 课</div>
+                        <div class="words-content">拟定、参谋、损失、锻炼、情不自禁、慰问、眷恋、奔赴、繁忙、特殊、尊重、签字、下意识、踌躇</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">11 课</div>
+                        <div class="words-content">诊所、年龄、熟练、审视、一针见血、施行、清醒、颤抖、一声不吭、崭新、由衷、苍白、慈祥、肃然起敬、荣幸</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">13 课</div>
+                        <div class="words-content">摔跤、手疾眼快、欺负、脚腕子、挺脱、肢体、格局、威严、侄子、喉咙</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">14 课</div>
+                        <div class="words-content">粉刷、师傅、绝活、派头、包袱、手法、鼓点、衔接、屏障、芝麻、神圣、侵犯、露馅儿、轰然、难堪、发怔</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">16 课</div>
+                        <div class="words-content">赏识、脚力、胸有成竹、摩拳擦掌、跃跃欲试、兴致勃勃、出谋划策、引荐</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">17 课</div>
+                        <div class="words-content">航行、风平浪静、取乐、放肆、桅杆、哭笑不得、眼巴巴、吓唬、龇牙咧嘴、船舱、海鸥、瞄准、心惊胆战</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">18 课</div>
+                        <div class="words-content">纵横、船艄、垫子、操纵、手忙脚乱、保姆、簇拥、沉寂、停泊、码头、笼罩</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">19 课</div>
+                        <div class="words-content">端庄、仪态、远眺、骏马、遮掩、阻挡、飞驰、辽阔、赞许、属于、板凳、吆喝、铃铛、恢复、沉睡、牲畜、灯塔</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">22 课</div>
+                        <div class="words-content">拇指、接触、纽扣、相貌、养尊处优、渺小、享乐、附庸、团结</div>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 30px;">词语积累</h3>
+                <div class="words-grid">
+                    <div class="words-card">
+                        <div class="words-title">AABC</div>
+                        <div class="words-content">津津有味、井井有条、历历在目</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">ABAB</div>
+                        <div class="words-content">商量商量、研究研究、打扮打扮</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">ABCC</div>
+                        <div class="words-content">白发苍苍、喜气洋洋、气喘吁吁</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">带有数字的成语</div>
+                        <div class="words-content">九牛一毛、三心二意、七上八下</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">带有反义词</div>
+                        <div class="words-content">左顾右盼、大惊小怪、大同小异</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">并列</div>
+                        <div class="words-content">望闻问切、琴棋书画、梅兰竹菊</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">带有如字</div>
+                        <div class="words-content">视死如归、胆小如鼠、挥汗如雨</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">身体器官</div>
+                        <div class="words-content">手疾眼快、肝胆相照、龇牙咧嘴</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">无X无X</div>
+                        <div class="words-content">无法无天、无边无垠、无时无刻、无穷无尽</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 古诗文鉴赏 -->
+            <section id="poems" class="section">
+                <h2>五、古诗文鉴赏</h2>
+                
+                <h3>古诗</h3>
+                <div class="poem">
+                    <div class="poem-title">1. 《四时田园杂兴（其三十一）》——[宋]范成大</div>
+                    <div class="poem-content">
+                        昼出耘田夜绩麻，村庄儿女各当家。<br>
+                        童孙未解供耕织，也傍桑阴学种瓜。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">2. 《稚子弄冰》——[宋]杨万里</div>
+                    <div class="poem-content">
+                        稚子金盆脱晓冰，彩丝穿取当银钲。<br>
+                        敲成玉磬穿林响，忽作玻璃碎地声。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">3. 《村晚》——[宋]雷震</div>
+                    <div class="poem-content">
+                        草满池塘水满陂，山衔落日浸寒漪。<br>
+                        牧童归去横牛背，短笛无腔信口吹。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">4. 《游子吟》——[唐]孟郊</div>
+                    <div class="poem-content">
+                        慈母手中线，游子身上衣。<br>
+                        临行密密缝，意恐迟迟归。<br>
+                        谁言寸草心，报得三春晖。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">5. 《鸟鸣涧》——[唐]王维</div>
+                    <div class="poem-content">
+                        人闲桂花落，夜静春山空。<br>
+                        月出惊山鸟，时鸣春涧中。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">6. 《从军行》——[唐]王昌龄</div>
+                    <div class="poem-content">
+                        青海长云暗雪山，孤城遥望玉门关。<br>
+                        黄沙百战穿金甲，不破楼兰终不还。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">7. 《秋夜将晓出篱门迎凉有感》——[宋]陆游</div>
+                    <div class="poem-content">
+                        三万里河东入海，五千仞岳上摩天。<br>
+                        遗民泪尽胡尘里，南望王师又一年。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">8. 《闻官军收河南河北》——[唐]杜甫</div>
+                    <div class="poem-content">
+                        剑外忽传收蓟北，初闻涕泪满衣裳。<br>
+                        却看妻子愁何在，漫卷诗书喜欲狂。<br>
+                        白日放歌须纵酒，青春作伴好还乡。<br>
+                        即从巴峡穿巫峡，便下襄阳向洛阳。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">9. 《凉州词》——[唐]王之涣</div>
+                    <div class="poem-content">
+                        黄河远上白云间，一片孤城万仞山。<br>
+                        羌笛何须怨杨柳，春风不度玉门关。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">10. 《黄鹤楼送孟浩然之广陵》——[唐]李白</div>
+                    <div class="poem-content">
+                        故人西辞黄鹤楼，烟花三月下扬州。<br>
+                        孤帆远影碧空尽，唯见长江天际流。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">11. 《乡村四月》——[宋]翁卷</div>
+                    <div class="poem-content">
+                        绿遍山原白满川，子规声里雨如烟。<br>
+                        乡村四月闲人少，才了蚕桑又插田。
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 30px;">古文</h3>
+                <div class="poem">
+                    <div class="poem-title">《自相矛盾》——《韩非子·难一》</div>
+                    <div class="poem-content">
+                        楚人有鬻盾与矛者，誉之曰："吾盾之坚，物莫能陷也。"又誉其矛曰："吾矛之利，于物无不陷也。"或曰："以子之矛陷子之盾，何如？" 其人弗能应也。夫不可陷之盾与无不陷之矛，不可同世而立。
+                    </div>
+                    <div class="quote">
+                        <strong>注释</strong><br>
+                        ① 本文选自《韩非子·难一》。<br>
+                        ② 〔鬻〕卖。<br>
+                        ③ 〔陷〕刺破。<br>
+                        ④ 〔或〕有的人。<br>
+                        ⑤ 〔夫〕放在句首，表示将发议论。
+                    </div>
+                </div>
+                
+                <div class="poem">
+                    <div class="poem-title">《杨氏之子》——《世说新语·言语》</div>
+                    <div class="poem-content">
+                        梁国杨氏子九岁，甚聪惠。孔君平诣其父，父不在，乃呼儿出。为设果，果有杨梅。孔指以示儿曰："此是君家果。"儿应声答曰："未闻孔雀是夫子家禽。"
+                    </div>
+                    <div class="quote">
+                        <strong>注释</strong><br>
+                        ① 本文选自《世说新语·言语》。<br>
+                        ② 〔惠〕同"慧"。<br>
+                        ③ 〔诣〕拜访。<br>
+                        ④ 〔乃〕就，于是。<br>
+                        ⑤ 〔示〕给……看。<br>
+                        ⑥ 〔夫子〕古时对男子的敬称，这里指孔君平。
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 30px;">名言</h3>
+                <div class="quote">
+                    君子喻于义，小人喻于利。——《论语》<br><br>
+                    君子坦荡荡，小人长戚戚。——《论语》<br><br>
+                    恻隐之心，仁之端也。——《孟子》<br><br>
+                    多行不义，必自毙。——《左传》<br><br>
+                    人有耻，则能有所不为。——《朱子语类》
+                </div>
+                
+                <h3 style="margin-top: 30px;">年龄称谓</h3>
+                <div class="words-grid">
+                    <div class="words-card">
+                        <div class="words-title">豆蔻年华</div>
+                        <div class="words-content">指女子十三四岁的年纪</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">及笄</div>
+                        <div class="words-content">指女子年满十五岁</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">弱冠</div>
+                        <div class="words-content">指男子二十岁左右的年纪</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">而立</div>
+                        <div class="words-content">指人三十岁</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">不惑</div>
+                        <div class="words-content">指人四十岁</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">花甲</div>
+                        <div class="words-content">指人六十岁</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">古稀</div>
+                        <div class="words-content">指人七十岁</div>
+                    </div>
+                    <div class="words-card">
+                        <div class="words-title">期颐</div>
+                        <div class="words-content">指人一百岁</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>语文知识点复习大全 &copy; 2023 - 精心整理，助力学习</p>
+        </footer>
+    </div>
+</body>
+</html>
