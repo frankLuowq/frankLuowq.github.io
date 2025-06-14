@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏五年级下学期数学知识体系 - 苏教版</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+            color: #333;
+            line-height: 1.7;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 400px;
+            background: linear-gradient(120deg, #1a5fb4, #2980b9);
+            z-index: -1;
+            border-radius: 0 0 30% 30%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            color: white;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        .grade-info {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 1s ease;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .knowledge-module {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .knowledge-module:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f7ff;
+        }
+        
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .module-1 .module-icon { background: #ffebee; color: #e53935; }
+        .module-2 .module-icon { background: #e8f5e9; color: #43a047; }
+        .module-3 .module-icon { background: #f3e5f5; color: #8e24aa; }
+        .module-4 .module-icon { background: #fff3e0; color: #f57c00; }
+        .module-5 .module-icon { background: #e0f7fa; color: #0097a7; }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .module-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        
+        .module-1 .module-tag { background: #ffcdd2; color: #c62828; }
+        .module-2 .module-tag { background: #c8e6c9; color: #2e7d32; }
+        .module-3 .module-tag { background: #e1bee7; color: #6a1b9a; }
+        .module-4 .module-tag { background: #ffe0b2; color: #e65100; }
+        .module-5 .module-tag { background: #b2ebf2; color: #006064; }
+        
+        .knowledge-points {
+            padding-left: 20px;
+        }
+        
+        .point-item {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .point-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+        
+        .point-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .point-details {
+            padding-left: 15px;
+        }
+        
+        .point-details li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .point-details li::before {
+            content: '•';
+            position: absolute;
+            left: 10px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .formula {
+            background: #e3f2fd;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .summary-section {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .summary-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4, #6a11cb);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #1a5fb4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .system-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: #f8fdff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0f7fa;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #80deea;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #1a5fb4;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .learning-tips {
+            background: linear-gradient(to right, #e3f2fd, #f3e5f5);
+            border-radius: 16px;
+            padding: 35px;
+            margin-top: 30px;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .tips-list {
+            list-style-type: none;
+            margin-top: 20px;
+        }
+        
+        .tips-list li {
+            padding: 18px 0;
+            padding-left: 60px;
+            position: relative;
+            border-bottom: 1px dashed #bbdefb;
+            font-size: 1.1rem;
+        }
+        
+        .tips-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .tip-number {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: #2196f3;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: #7f8c8d;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .module-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .module-icon {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>江苏五年级下学期数学知识体系</h1>
+                <div class="subtitle">苏教版教材核心知识点与学习指南</div>
+                <div class="grade-info">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>五年级下学期数学重点内容全解析</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <!-- 分数的意义与运算 -->
+            <div class="knowledge-module module-1">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div>
+                        <h2>分数的意义与运算</h2>
+                        <div class="module-tag">重点与难点</div>
+                    </div>
+                </div>
+                
+                <div class="knowledge-points">
+                    <div class="point-item">
+                        <div class="point-title">分数的意义与性质</div>
+                        <ul class="point-details">
+                            <li>分数与除法的关系：理解 <span class="highlight">被除数 ÷ 除数 = 被除数/除数</span>，能用分数表示整数除法的商</li>
+                            <li>求一个数是另一个数的几分之几：解决实际问题（如：男生人数是女生的几分之几？）</li>
+                            <li><span class="highlight">真分数、假分数、带分数</span>：
+                                <ul>
+                                    <li>理解定义，能熟练辨别</li>
+                                    <li><span class="highlight">假分数与整数、带分数的互化</span>：掌握互化的方法并能灵活应用</li>
+                                </ul>
+                            </li>
+                            <li><span class="highlight">分数的基本性质</span>：熟练运用性质进行分数的<span class="highlight">约分</span>和<span class="highlight">通分</span></li>
+                            <li>分数与小数的互化：掌握常用分数与小数的互化，并能比较大小</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">分数的加减法</div>
+                        <ul class="point-details">
+                            <li><span class="highlight">同分母分数加减法</span>：熟练计算，理解算理</li>
+                            <li><span class="highlight">异分母分数加减法</span>（重中之重）：
+                                <ul>
+                                    <li>掌握核心步骤：<span class="highlight">通分 → 转化为同分母分数 → 相加减 → 约分化简</span></li>
+                                    <li>理解通分的必要性和算理（统一分数单位）</li>
+                                    <li>能正确、熟练地进行计算，结果要约成最简分数</li>
+                                </ul>
+                            </li>
+                            <li><span class="highlight">分数加减混合运算</span>：
+                                <ul>
+                                    <li>运算顺序：与整数相同（从左到右，有括号先算括号内）</li>
+                                    <li>整数加法的运算律对分数加法同样适用</li>
+                                </ul>
+                            </li>
+                            <li><span class="highlight">解决实际问题</span>：工程进度、路程计算、配料问题等</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 圆 -->
+            <div class="knowledge-module module-2">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <div>
+                        <h2>圆</h2>
+                        <div class="module-tag">平面图形的深化</div>
+                    </div>
+                </div>
+                
+                <div class="knowledge-points">
+                    <div class="point-item">
+                        <div class="point-title">圆的认识</div>
+                        <ul class="point-details">
+                            <li>圆心(O)、半径(r)、直径(d)的概念及字母表示</li>
+                            <li>理解同一圆内半径、直径的特征及关系：
+                                <div class="formula">d = 2r, r = d/2</div>
+                            </li>
+                            <li>圆是轴对称图形，有无数条对称轴</li>
+                            <li>会用圆规画规定大小的圆</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">圆的周长</div>
+                        <ul class="point-details">
+                            <li>圆周率(π)的概念（π ≈ 3.14）</li>
+                            <li>圆的周长公式：
+                                <div class="formula">C = πd 或 C = 2πr</div>
+                            </li>
+                            <li>能根据直径或半径计算周长，或根据周长求直径/半径</li>
+                            <li>解决与圆周长相关的实际问题（车轮滚动、绕绳问题等）</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">圆的面积</div>
+                        <ul class="point-details">
+                            <li>圆的面积公式推导（通过剪拼成近似长方形）：
+                                <div class="formula">S = πr²</div>
+                            </li>
+                            <li>能熟练运用公式计算圆的面积</li>
+                            <li>掌握简单的圆环面积计算：
+                                <div class="formula">S环 = πR² - πr² = π(R² - r²)</div>
+                            </li>
+                            <li>解决与圆面积相关的实际问题（花坛面积、圆形桌面用料等）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 折线统计图 -->
+            <div class="knowledge-module module-3">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h2>折线统计图</h2>
+                        <div class="module-tag">数据分析</div>
+                    </div>
+                </div>
+                
+                <div class="knowledge-points">
+                    <div class="point-item">
+                        <div class="point-title">单式折线统计图</div>
+                        <ul class="point-details">
+                            <li>认识折线统计图的结构（标题、横轴、纵轴、图例、数据点、连线）</li>
+                            <li>理解折线统计图的特点：<span class="highlight">反映数据变化趋势</span></li>
+                            <li>能根据数据绘制单式折线统计图</li>
+                            <li>能进行简单的数据分析（最高点、最低点、变化趋势、预测）</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">复式折线统计图</div>
+                        <ul class="point-details">
+                            <li>认识复式折线统计图（用不同颜色或线型表示不同组数据）</li>
+                            <li>理解复式折线统计图的优点：<span class="highlight">比较数据变化情况和趋势</span></li>
+                            <li>能根据数据绘制复式折线统计图（注意图例）</li>
+                            <li>能进行比较和分析（如气温变化、销售对比等）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 简易方程 -->
+            <div class="knowledge-module module-4">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div>
+                        <h2>简易方程</h2>
+                        <div class="module-tag">代数思想的渗透</div>
+                    </div>
+                </div>
+                
+                <div class="knowledge-points">
+                    <div class="point-item">
+                        <div class="point-title">用字母表示数</div>
+                        <ul class="point-details">
+                            <li>理解用字母可以表示数、数量关系和公式</li>
+                            <li>掌握用字母表示运算定律和计算公式</li>
+                            <li>会将数值代入含有字母的式子求值</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">等式与方程</div>
+                        <ul class="point-details">
+                            <li>理解等式的意义（表示相等关系的式子）</li>
+                            <li>理解方程的意义：<span class="highlight">含有未知数的等式</span></li>
+                            <li>能判断一个式子是否是方程</li>
+                            <li>理解方程的解和解方程的含义</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">解简单方程</div>
+                        <ul class="point-details">
+                            <li><span class="highlight">等式性质1</span>：等式两边同时加上或减去同一个数，结果仍是等式</li>
+                            <li><span class="highlight">等式性质2</span>：等式两边同时乘或除以同一个不是0的数，结果仍是等式</li>
+                            <li>利用等式性质解方程：x ± a = b, ax = b, x ÷ a = b, ax ± b = c</li>
+                            <li>掌握检验方程解的方法</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">列方程解决实际问题</div>
+                        <ul class="point-details">
+                            <li>学习分析实际问题中的数量关系</li>
+                            <li>掌握列方程解应用题的一般步骤：
+                                <ol>
+                                    <li>弄清题意，找出未知数并用字母表示</li>
+                                    <li>分析数量关系，找出等量关系</li>
+                                    <li>根据等量关系列出方程</li>
+                                    <li>解方程</li>
+                                    <li>检验并写出答案</li>
+                                </ol>
+                            </li>
+                            <li>解决逆向思维或数量关系复杂的问题</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 其他重要内容 -->
+            <div class="knowledge-module module-5">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div>
+                        <h2>其他重要内容</h2>
+                        <div class="module-tag">基础知识与应用</div>
+                    </div>
+                </div>
+                
+                <div class="knowledge-points">
+                    <div class="point-item">
+                        <div class="point-title">因数与倍数</div>
+                        <ul class="point-details">
+                            <li>因数、倍数、质数、合数、最大公因数、最小公倍数的概念</li>
+                            <li>这些概念是分数约分、通分的基础</li>
+                            <li>需要确保这些概念掌握牢固</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-item">
+                        <div class="point-title">解决问题的策略</div>
+                        <ul class="point-details">
+                            <li>转化思想（在圆面积推导中体现）</li>
+                            <li>画图法（线段图分析数量关系）</li>
+                            <li>列表法</li>
+                            <li>尝试法</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="summary-section">
+            <h2 class="section-title"><i class="fas fa-lightbulb"></i> 知识体系特点总结</h2>
+            
+            <div class="system-features">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-calculator"></i></div>
+                    <h3 class="feature-title">分数计算深化</h3>
+                    <p>分数的运算（特别是异分母加减法）是计算能力的核心挑战，需要重点掌握。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h3 class="feature-title">几何应用提升</h3>
+                    <p>圆的认识、周长和面积计算是小学阶段平面几何的重要总结，需理解公式推导过程。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3 class="feature-title">代数思想萌芽</h3>
+                    <p>简易方程引入了代数思维，是解决实际问题的新工具，也是中学代数的基石。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3 class="feature-title">数据分析提升</h3>
+                    <p>折线统计图提升了数据分析和解读能力，培养从数据中发现规律的能力。</p>
+                </div>
+            </div>
+            
+            <div class="learning-tips">
+                <h3 class="section-title"><i class="fas fa-graduation-cap"></i> 学习建议与策略</h3>
+                <ul class="tips-list">
+                    <li>
+                        <div class="tip-number">1</div>
+                        <strong>狠抓计算：</strong>异分母分数加减法、通分、约分必须达到熟练、准确的程度。每天保持适量计算练习。
+                    </li>
+                    <li>
+                        <div class="tip-number">2</div>
+                        <strong>理解概念：</strong>深刻理解分数的意义、方程的意义、圆的特征、统计图的作用。死记硬背公式效果有限。
+                    </li>
+                    <li>
+                        <div class="tip-number">3</div>
+                        <strong>重视应用：</strong>无论是分数、圆、方程还是统计图，都要落脚到解决实际问题。多做应用题，练习分析数量关系和寻找等量关系。
+                    </li>
+                    <li>
+                        <div class="tip-number">4</div>
+                        <strong>动手实践：</strong>在学习圆时，多画图、多操作（如用圆规画圆、剪拼圆），加深对公式推导的理解。学习统计图时，尝试自己收集数据、绘制图表。
+                    </li>
+                    <li>
+                        <div class="tip-number">5</div>
+                        <strong>联系旧知：</strong>将新学的方程解法与算术解法对比，体会其优势。将分数运算与整数、小数运算联系起来思考。
+                    </li>
+                    <li>
+                        <div class="tip-number">6</div>
+                        <strong>重点突破：</strong>重点关注<strong>异分母分数运算</strong>和<strong>列方程解应用题</strong>两大难点模块，结合画图策略强化理解。
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 江苏五年级下学期数学学习指南 | 基于苏教版教材知识体系整理</p>
+            <p>本知识体系梳理帮助学生、家长和老师清晰把握江苏五年级下学期数学的重点和学习方向</p>
+        </footer>
+    </div>
+</body>
+</html>
