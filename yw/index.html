@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语文学习资源导航</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f3e9 0%, #e8dfca 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" stroke="%23d4c09e" stroke-width="0.5" opacity="0.3" x="10" y="10" width="80" height="80" rx="5"/></svg>');
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            color: #8b0000;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #8b0000, #d4af37);
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #5a3921;
+            max-width: 600px;
+            margin: 20px auto 0;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background: linear-gradient(145deg, #ffffff, #f5f0e6);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            perspective: 1000px;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(139, 0, 0, 0.25);
+        }
+        
+        .card-content {
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8b0000, #a52a2a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
+        }
+        
+        .card-title {
+            font-size: 1.6rem;
+            color: #5a3921;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .card-desc {
+            color: #7d6b58;
+            line-height: 1.6;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+        
+        .card-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: linear-gradient(to right, #8b0000, #a52a2a);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.2);
+        }
+        
+        .card-link:hover {
+            background: linear-gradient(to right, #a52a2a, #c04040);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 0, 0, 0.3);
+        }
+        
+        .card-link i {
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .decoration {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.1;
+        }
+        
+        .decoration-1 {
+            top: 20px;
+            right: 20px;
+            font-size: 6rem;
+            color: #8b0000;
+        }
+        
+        .decoration-2 {
+            bottom: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: #5a3921;
+            transform: rotate(30deg);
+        }
+        
+        .book-corner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 60px 60px 0;
+            border-color: transparent #d4af37 transparent transparent;
+            z-index: 3;
+        }
+        
+        .book-corner::after {
+            content: "";
+            position: absolute;
+            top: 6px;
+            right: -60px;
+            width: 40px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(45deg);
+            border-radius: 2px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #7d6b58;
+            font-size: 0.9rem;
+            padding: 20px;
+            border-top: 1px solid rgba(139, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 30px auto;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .resource-card {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i> 语文学习资源导航</h1>
+            <p class="subtitle">精选四大语文学习资源，全面覆盖知识点、阅读方法与答题技巧，助你提升语文学习效率，轻松应对各类考试</p>
+        </header>
+        
+        <div class="resources-grid">
+            <!-- 语文知识点复习大全 -->
+            <div class="resource-card">
+                <div class="book-corner"></div>
+                <div class="decoration decoration-1"><i class="fas fa-feather-alt"></i></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h2 class="card-title">语文知识点复习大全</h2>
+                    <p class="card-desc">全面梳理语文基础知识，涵盖字词、语法、修辞、文学常识等核心内容，系统化复习方案助你夯实基础。</p>
+                    <a href="1.html" class="card-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- 语文园地知识点大全 -->
+            <div class="resource-card">
+                <div class="book-corner"></div>
+                <div class="decoration decoration-2"><i class="fas fa-pen-nib"></i></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h2 class="card-title">语文园地知识点大全</h2>
+                    <p class="card-desc">深入解析课本中的语文园地内容，包括拓展阅读、写作指导、口语交际等模块，全面提升语文综合能力。</p>
+                    <a href="2.html" class="card-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- 阅读方法答题指南大全 -->
+            <div class="resource-card">
+                <div class="book-corner"></div>
+                <div class="decoration decoration-1"><i class="fas fa-book-reader"></i></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-glasses"></i>
+                    </div>
+                    <h2 class="card-title">阅读方法答题指南大全</h2>
+                    <p class="card-desc">掌握高效阅读技巧，学习各类文本分析方法，提供实用的答题模板和策略，提高阅读理解准确率。</p>
+                    <a href="3.html" class="card-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- 说明文答题方法指南 -->
+            <div class="resource-card">
+                <div class="book-corner"></div>
+                <div class="decoration decoration-2"><i class="fas fa-file-alt"></i></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h2 class="card-title">说明文答题方法指南</h2>
+                    <p class="card-desc">针对说明文特点，解析结构要素，提供专业答题方法，包含例题详解和实战训练，攻克说明文阅读难点。</p>
+                    <a href="4.html" class="card-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 语文学习资源导航 | 让语文学习更高效、更轻松</p>
+        </footer>
+    </div>
+</body>
+</html>
