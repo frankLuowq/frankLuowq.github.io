@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经典名著阅读测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4eff9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #e74c3c, #3498db, #9b59b6);
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: linear-gradient(to bottom, #f8f9fc, #ffffff);
+            position: relative;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            right: 25%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 4px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background: #f8f9fc;
+            border-bottom: 1px solid #eaeef5;
+            padding: 0 20px;
+        }
+        
+        .tab {
+            padding: 18px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab.active {
+            color: #3498db;
+        }
+        
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #3498db;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab:hover {
+            color: #2980b9;
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        .book-section {
+            padding: 30px 35px;
+            display: none;
+        }
+        
+        .book-section.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .book-title {
+            font-size: 1.9rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f3f8;
+            display: flex;
+            align-items: center;
+        }
+        
+        .edu-love .book-title {
+            color: #e74c3c;
+        }
+        
+        .journey-west .book-title {
+            color: #3498db;
+        }
+        
+        .book-title::before {
+            content: "📚";
+            margin-right: 12px;
+            font-size: 1.7rem;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin: 25px 0 20px;
+            padding-left: 20px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .question-list {
+            counter-reset: question-counter;
+        }
+        
+        .question-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid #f0f3f8;
+        }
+        
+        .question-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #e0e8f5;
+        }
+        
+        .question-item::before {
+            counter-increment: question-counter;
+            content: counter(question-counter) ".";
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 36px;
+            height: 36px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .edu-love .question-item::before {
+            background: #e74c3c;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .journey-west .question-item::before {
+            background: #3498db;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 500;
+            padding-left: 10px;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-left: 20px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background: #f8fafd;
+            border-radius: 10px;
+            border: 2px solid #e0e8f5;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: #eef5fd;
+            transform: translateX(5px);
+            border-color: #a0c4f0;
+        }
+        
+        .edu-love .option:hover {
+            border-color: #f5b1aa;
+        }
+        
+        .journey-west .option:hover {
+            border-color: #a0c4f0;
+        }
+        
+        .option::before {
+            content: attr(data-option);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .edu-love .option::before {
+            background: #e74c3c;
+        }
+        
+        .journey-west .option::before {
+            background: #3498db;
+        }
+        
+        .option.selected {
+            background: #e1f0fa;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .edu-love .option.selected {
+            background: #fceae8;
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+        }
+        
+        .option.correct {
+            background: #d4fae6;
+            border-color: #2ecc71;
+        }
+        
+        .option.correct::before {
+            background: #2ecc71;
+        }
+        
+        .option.incorrect {
+            background: #fceae9;
+            border-color: #e74c3c;
+        }
+        
+        .option.incorrect::before {
+            background: #e74c3c;
+        }
+        
+        .result-panel {
+            background: #f8f9fc;
+            border-top: 1px solid #eaeef5;
+            padding: 25px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .score {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .score span {
+            color: #3498db;
+            font-size: 1.5rem;
+        }
+        
+        .edu-love .score span {
+            color: #e74c3c;
+        }
+        
+        .btn {
+            padding: 14px 30px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .edu-love .btn {
+            background: #e74c3c;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .edu-love .btn:hover {
+            background: #c0392b;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0 20px;
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                border-radius: 14px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tab {
+                padding: 15px 20px;
+                font-size: 1.1rem;
+            }
+            
+            .book-section {
+                padding: 25px 20px;
+            }
+            
+            .result-panel {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>经典名著阅读测试</h1>
+            <p class="subtitle">检验你对《爱的教育》和《西游记》的理解程度，每题10分，满分100分</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-target="edu-love">《爱的教育》</div>
+            <div class="tab" data-target="journey-west">《西游记》</div>
+        </div>
+        
+        <section class="book-section edu-love active" id="edu-love">
+            <h2 class="book-title">《爱的教育》阅读题</h2>
+            
+            <h3 class="section-title">一、选择题</h3>
+            
+            <ol class="question-list">
+                <li class="question-item" data-correct="A">
+                    <div class="question-text">《爱的教育》是一部（ ）小说。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">日记体儿童小说</div>
+                        <div class="option" data-option="B">自传体小说</div>
+                        <div class="option" data-option="C">武侠小说</div>
+                        <div class="option" data-option="D">科幻小说</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="C">
+                    <div class="question-text">帕多瓦少年为什么用钱砸向施舍钱给他的三位旅客呢？（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">他们想要回钱</div>
+                        <div class="option" data-option="B">他们辱骂他的妈妈</div>
+                        <div class="option" data-option="C">他们辱骂他的祖国</div>
+                        <div class="option" data-option="D">他们欺负他</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="C">
+                    <div class="question-text">"我"的妈妈和我去幼儿园，将要离开时，很多孩子从四面八方围过来，争着要母亲抱，母亲（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">很生气，批评孩子不能乱扯</div>
+                        <div class="option" data-option="B">慌忙后退</div>
+                        <div class="option" data-option="C">毫不介意，将他们拉近了吻着</div>
+                        <div class="option" data-option="D">很无奈</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="A">
+                    <div class="question-text">"我"的母亲经常带着"我"和姐姐去给报纸上报道的、住在贫民窟的穷苦妇人（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">送食物</div>
+                        <div class="option" data-option="B">送布</div>
+                        <div class="option" data-option="C">送首饰</div>
+                        <div class="option" data-option="D">送柴火</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="C">
+                    <div class="question-text">女老师代尔卡谛去看马鞍匠的儿子，因为他（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">发高烧</div>
+                        <div class="option" data-option="B">逃学</div>
+                        <div class="option" data-option="C">出麻疹</div>
+                        <div class="option" data-option="D">出水痘</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="B">
+                    <div class="question-text">《爱的教育》这本书的原名是（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">《爱》</div>
+                        <div class="option" data-option="B">《心》</div>
+                        <div class="option" data-option="C">《爱的源泉》</div>
+                        <div class="option" data-option="D">《心愿》</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="C">
+                    <div class="question-text">《爱的教育》以第（ ）人称讲述他的校内生活。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">三</div>
+                        <div class="option" data-option="B">二</div>
+                        <div class="option" data-option="C">一</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="D">
+                    <div class="question-text">《爱的教育》中，老师讲的故事，大致可以分为爱国故事和美德故事两类。爱国故事包括《少年爱国者》《少年侦探》和（ ）三篇。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">《开学第一天》</div>
+                        <div class="option" data-option="B">《我们的老师》</div>
+                        <div class="option" data-option="C">《爱心》</div>
+                        <div class="option" data-option="D">《少年鼓手》</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="C">
+                    <div class="question-text">《爱的教育》写的是主人公安利柯的（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">家庭生活</div>
+                        <div class="option" data-option="B">课余生活</div>
+                        <div class="option" data-option="C">校园生活</div>
+                        <div class="option" data-option="D">工作生活</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="B">
+                    <div class="question-text">主人公安利柯的老师是位怎样的男老师？（ ）</div>
+                    <div class="options">
+                        <div class="option" data-option="A">脾气暴躁</div>
+                        <div class="option" data-option="B">很有耐心</div>
+                        <div class="option" data-option="C">身材矮小</div>
+                        <div class="option" data-option="D">身材高大</div>
+                    </div>
+                </li>
+            </ol>
+            
+            <div class="result-panel">
+                <div class="score">得分：<span id="edu-score">0</span> / 100</div>
+                <button class="btn" id="check-edu">提交答案</button>
+            </div>
+        </section>
+        
+        <section class="book-section journey-west" id="journey-west">
+            <h2 class="book-title">《西游记》阅读题</h2>
+            
+            <h3 class="section-title">一、选择题</h3>
+            
+            <ol class="question-list">
+                <li class="question-item" data-correct="D">
+                    <div class="question-text">《西游记》的作者是（ ）朝的（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">清；曹雪芹</div>
+                        <div class="option" data-option="B">明；罗贯中</div>
+                        <div class="option" data-option="C">明；施耐庵</div>
+                        <div class="option" data-option="D">明；吴承恩</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="C">
+                    <div class="question-text">唐僧西天取经用时多久，路程多远，历经多少难？（ ）</div>
+                    <div class="options">
+                        <div class="option" data-option="A">十四寒暑 九万八千里 九九八十一难</div>
+                        <div class="option" data-option="B">十六寒暑 十万八千里 九九八十一难</div>
+                        <div class="option" data-option="C">十四寒暑 十万八千里 九九八十一难</div>
+                        <div class="option" data-option="D">十四寒暑 十万八千里 七七四十九难</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="C">
+                    <div class="question-text">孙悟空与红孩儿争斗中，后来大圣请来了（ ），才把红孩儿治服。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">文殊菩萨</div>
+                        <div class="option" data-option="B">太上老君</div>
+                        <div class="option" data-option="C">观音菩萨</div>
+                        <div class="option" data-option="D">如来佛祖</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="B">
+                    <div class="question-text">从八卦炉出来后，孙悟空拥有了（ ）的本领。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">七十二变</div>
+                        <div class="option" data-option="B">火眼金睛</div>
+                        <div class="option" data-option="C">筋斗云</div>
+                        <div class="option" data-option="D">铜头铁臂</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="B">
+                    <div class="question-text">"三打白骨精"的"三"表示"三次"意思，请问下列词中哪个词中的"三"的意思与"三打白骨精"中"三"的意思一样？（ ）</div>
+                    <div class="options">
+                        <div class="option" data-option="A">五大三粗</div>
+                        <div class="option" data-option="B">三顾茅庐</div>
+                        <div class="option" data-option="C">三妻四妾</div>
+                        <div class="option" data-option="D">三心二意</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="D">
+                    <div class="question-text">"一头红焰发蓬松，两只圆睛亮似灯。不黑不清蓝靛脸，如雷如鼓老龙声。身披一翎黄鹅撇，腰束双攒露白藤。项下骷髅悬九个，手持宝杖甚峥嵘。"这段文字描写的是《西游记》中的哪个人物？（ ）</div>
+                    <div class="options">
+                        <div class="option" data-option="A">孙悟空</div>
+                        <div class="option" data-option="B">猪八戒</div>
+                        <div class="option" data-option="C">二郎神</div>
+                        <div class="option" data-option="D">沙和尚</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="A">
+                    <div class="question-text">行者道："把那个耙子嘴，揣在怀里，莫拿出来：把那蒲扇耳，贴在后面，不要摇动，这就是收拾了。"这句话是孙悟空对哪个人物说的？（ ）</div>
+                    <div class="options">
+                        <div class="option" data-option="A">猪八戒</div>
+                        <div class="option" data-option="B">沙和尚</div>
+                        <div class="option" data-option="C">孙悟空</div>
+                        <div class="option" data-option="D">赤脚大仙</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="B">
+                    <div class="question-text">红孩儿被南海观音封为（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">净坛使者</div>
+                        <div class="option" data-option="B">善财童子</div>
+                        <div class="option" data-option="C">金身罗汉</div>
+                        <div class="option" data-option="D">旃檀功德佛</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="D">
+                    <div class="question-text">下列关于西游记的俗语对应不正确的是（ ）。</div>
+                    <div class="options">
+                        <div class="option" data-option="A">猪八戒照镜子——里外不是人</div>
+                        <div class="option" data-option="B">白骨精想吃唐僧肉——痴心妄想</div>
+                        <div class="option" data-option="C">孙悟空三打白骨精——降妖拿怪</div>
+                        <div class="option" data-option="D">唐三藏过火焰山——胜券在握</div>
+                    </div>
+                </li>
+                
+                <li class="question-item" data-correct="D">
+                    <div class="question-text">《西游记》的影响和价值是什么？（ ）</div>
+                    <div class="options">
+                        <div class="option" data-option="A">开辟了神魔长篇小说的新门类。</div>
+                        <div class="option" data-option="B">将善意的嘲笑、辛辣的嘲讽和严肃的批判巧妙结合，影响着讽刺小说的发展。</div>
+                        <div class="option" data-option="C">《西游记》中的每个人物都性格鲜明，它是古代文学高峰，是浪漫主义的伟大杰作。</div>
+                        <div class="option" data-option="D">以上都是</div>
+                    </div>
+                </li>
+            </ol>
+            
+            <div class="result-panel">
+                <div class="score">得分：<span id="west-score">0</span> / 100</div>
+                <button class="btn" id="check-west">提交答案</button>
+            </div>
+        </section>
+        
+        <footer>
+            <p>经典名著阅读测试 © 2023 | 提升文学素养，传承经典文化</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 切换标签页
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                
+                // 更新标签状态
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 显示对应内容
+                document.querySelectorAll('.book-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        
+        // 选项选择功能
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question-item');
+                
+                // 移除同题目下其他选项的选中状态
+                question.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // 添加当前选项的选中状态
+                this.classList.add('selected');
+            });
+        });
+        
+        // 检查《爱的教育》答案
+        document.getElementById('check-edu').addEventListener('click', function() {
+            checkAnswers('edu-love', 'edu-score');
+        });
+        
+        // 检查《西游记》答案
+        document.getElementById('check-west').addEventListener('click', function() {
+            checkAnswers('journey-west', 'west-score');
+        });
+        
+        // 检查答案的函数
+        function checkAnswers(sectionId, scoreId) {
+            const section = document.getElementById(sectionId);
+            const questions = section.querySelectorAll('.question-item');
+            let score = 0;
+            
+            questions.forEach(question => {
+                const correctAnswer = question.getAttribute('data-correct');
+                const selectedOption = question.querySelector('.option.selected');
+                
+                if (selectedOption) {
+                    const userAnswer = selectedOption.getAttribute('data-option');
+                    
+                    // 标记所有选项
+                    question.querySelectorAll('.option').forEach(option => {
+                        option.classList.remove('correct', 'incorrect');
+                        
+                        if (option.getAttribute('data-option') === correctAnswer) {
+                            option.classList.add('correct');
+                        } else if (option === selectedOption) {
+                            option.classList.add('incorrect');
+                        }
+                    });
+                    
+                    // 计分
+                    if (userAnswer === correctAnswer) {
+                        score += 10;
+                    }
+                }
+            });
+            
+            // 更新分数
+            document.getElementById(scoreId).textContent = score;
+            
+            // 显示提示
+            alert(`测试完成！您的得分是 ${score} 分`);
+        }
+    </script>
+</body>
+</html>
